@@ -34,9 +34,20 @@ export type QueryUserByidArgs = {
 
 export type User = {
   __typename?: 'User';
+  address: UserAddress;
   email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  phone: Scalars['String'];
+  website: Scalars['String'];
+};
+
+export type UserAddress = {
+  __typename?: 'UserAddress';
+  city: Scalars['String'];
+  street: Scalars['String'];
+  suite: Scalars['String'];
+  zipcode: Scalars['String'];
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -151,6 +162,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
+  UserAddress: ResolverTypeWrapper<UserAddress>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -160,6 +172,7 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
   User: User;
+  UserAddress: UserAddress;
 };
 
 export type QueryResolvers<
@@ -185,13 +198,29 @@ export type UserResolvers<
   ParentType extends
     ResolversParentTypes['User'] = ResolversParentTypes['User'],
 > = {
+  address?: Resolver<ResolversTypes['UserAddress'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UserAddressResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserAddress'] = ResolversParentTypes['UserAddress'],
+> = {
+  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  street?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  suite?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  zipcode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  UserAddress?: UserAddressResolvers<ContextType>;
 };

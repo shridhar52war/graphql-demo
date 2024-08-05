@@ -1,5 +1,13 @@
 import { RESTDataSource } from '@apollo/datasource-rest';
 
+//https://jsonplaceholder.typicode.com/guide/
+
+/**
+ * Tasks;
+ * 1. fetch posts associated with the user
+ * 2. fetch todos associated with user
+ */
+
 export default class UserAPI extends RESTDataSource {
   constructor() {
     super();
@@ -8,16 +16,11 @@ export default class UserAPI extends RESTDataSource {
 
   getUsers = async () => {
     const response = await this.get(`/users`);
-    console.log('response', response);
-
     return response;
   };
 
   getUserById = async (id) => {
-    return {
-      id: 'id',
-      name: 'shridhar',
-      email: 'shr@fa',
-    };
+    const response = await this.get(`/users/${id}`);
+    return response;
   };
 }

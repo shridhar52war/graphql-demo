@@ -3,11 +3,6 @@ import User from './User.js';
 import userByid from './userById.js';
 import users from './users.js';
 
-// const typeDefs = mergeTypeDefs([users.typeDefs]);
-// const resolvers = mergeResolvers([users.resolvers]);
-
-// Then pass typeDefs and resolvers to makeExecutableSchema or ApolloServer
-
 const typeDefs = mergeTypeDefs([
   User.typeDefs,
   userByid.typeDefs,
@@ -19,12 +14,6 @@ const resolvers = mergeResolvers([
   userByid.resolvers,
   users.resolvers,
 ]);
-
-// const resolvers = {
-//   ...User.resolvers,
-//   ...userByid.resolvers,
-//   ...users.resolvers,
-// };
 
 export default {
   typeDefs,
