@@ -1,0 +1,31 @@
+overwrite: true
+schema: schema.graphql
+generates:
+  src/types/typings.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
+
+    config:
+      namingConvention:
+        enumValues: upper-case#upperCase
+      scalars:
+        DateTime: Date
+        JSONObject: '{ [key: string]: any }'
+        EmailAddress: string
+        PositiveInt: number
+        NonNegativeInt: number
+        BigInt: number
+        URL: string
+        Upload: any
+        JSON: '{ [key: string]: any }'
+  src/types/possibleTypes.json:
+    plugins:
+      - fragment-matcher
+  src/types/fragments.json:
+    plugins:
+      - introspection
+hooks:
+  afterAllFileWrite:
+    - "npx prettier --write 'src/types/**/*.{js,ts,json}'"
